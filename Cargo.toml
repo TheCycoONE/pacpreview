@@ -4,6 +4,13 @@ version = "0.1.0"
 authors = ["Stephen E. Baker <baker.stephen.e@gmail.com>"]
 edition = "2018"
 
+description = "Unified info output for pacman packages"
+readme = "README.md"
+license = "GPL-3.0-or-later"
+repository = "https://github.com/TheCycoONE/pacpreview"
+keywords = ["pacman","archlinux"]
+categories = ["command-line-utilities"]
+
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
