@@ -1,8 +1,8 @@
 use alpm::{Alpm, AlpmList, Db, Dep, Package, SigLevel};
 
-const ROOT_DIR: &'static str = "/";
-const PKG_DB_DIR: &'static str = "/var/lib/pacman/";
-const ARCH: &'static str = "aarch64";
+const ROOT_DIR: &str = "/";
+const PKG_DB_DIR: &str = "/var/lib/pacman/";
+const ARCH: &str = "aarch64";
 const REPOS: [&str; 4] = ["core", "extra", "community", "alarm"];
 
 fn main() {
@@ -22,10 +22,10 @@ fn main() {
 }
 
 fn print_pkg_with_name(pkg_name: &str, alpm: &Alpm) {
-    let installed_pkg = alpm.localdb().pkg(pkg_name.clone());
+    let installed_pkg = alpm.localdb().pkg(pkg_name);
     let db_list = alpm.syncdbs();
     for db in db_list {
-        if let Ok(pkg) = db.pkg(pkg_name.clone()) {
+        if let Ok(pkg) = db.pkg(pkg_name) {
             print_package_details(alpm, &db, &pkg, &installed_pkg.ok());
             break;
         }
