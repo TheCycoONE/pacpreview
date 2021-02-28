@@ -2,7 +2,8 @@ use alpm::{Alpm, AlpmList, Db, Dep, Package, SigLevel};
 
 const ROOT_DIR: &'static str = "/";
 const PKG_DB_DIR: &'static str = "/var/lib/pacman/";
-
+const ARCH: &'static str = "aarch64";
+const REPOS: [&str; 4] = ["core", "extra", "community", "alarm"];
 
 fn main() {
     let mut args = std::env::args();
@@ -11,12 +12,12 @@ fn main() {
 
     // setup alpm
     let alpm = Alpm::new(ROOT_DIR, PKG_DB_DIR).unwrap();
-    alpm.set_arch("aarch64");
-    alpm.register_syncdb("core", SigLevel::USE_DEFAULT).unwrap();
-    alpm.register_syncdb("extra", SigLevel::USE_DEFAULT).unwrap(); 
-    alpm.register_syncdb("community", SigLevel::USE_DEFAULT).unwrap();
-    alpm.register_syncdb("alarm", SigLevel::USE_DEFAULT).unwrap();
-   
+    alpm.set_arch(ARCH);
+
+    for repo in REPOS.iter() {
+        alpm.register_syncdb(*repo, SigLevel::USE_DEFAULT).unwrap();
+    }
+
     print_pkg_with_name(&pkg_name, &alpm);
 }
 
@@ -73,7 +74,7 @@ fn print_package_details(alpm: &Alpm, db: &Db, pkg: &Package, installed_pkg: &Op
         }
         let reason = match ip.reason() {
             alpm::PackageReason::Depend => "dependency",
-            alpm::PackageReason::Explicit => "explicit"
+            alpm::PackageReason::Explicit => "explicit",
         };
         println!("Installed Reason: {}", reason);
     }
