@@ -38,7 +38,7 @@ fn print_dep_list(alpm: &Alpm, dep_list: AlpmList<Dep>) {
         if !dep.desc().is_empty() {
             print!(": {}", dep.desc());
         }
-        let ip = alpm.localdb().pkgs().find_satisfier(dep.name());
+        let ip = alpm.localdb().pkgs().find_satisfier(dep.to_string());
         if let Some(p) = ip {
             if p.name() == dep.name() {
                 print!(" [installed]");
