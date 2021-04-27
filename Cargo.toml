@@ -16,3 +16,7 @@ categories = ["command-line-utilities"]
 [dependencies]
 "alpm"="1.1"
 pacmanconf = "1.0.0"
+
+[features]
+git = ["alpm/git"]
+
