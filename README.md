@@ -3,8 +3,6 @@ Helpful unified package info screen for pacman
 
 I was looking for a better info screen to use as the preview window for fzf over the pacman package list.
 
-At this time the tool is designed for my personal use. It DOES NOT parse pacman.conf, and uses hard coded architecture, repo list and paths.
-
 ## Examples
 ### Package is not installed:
 ```
