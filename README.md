@@ -3,6 +3,19 @@ Helpful unified package info screen for pacman
 
 I was looking for a better info screen to use as the preview window for fzf over the pacman package list.
 
+## Usage
+### Standalone
+**pacpreview** *package_name*
+
+### With fzf
+Add an alias to your bashrc or zshrc file:
+```bash
+alias pacs="pacman -Slq | fzf --multi --preview 'pacpreview {1}' | xargs -ro sudo pacman -S"
+```
+
+Then run:
+`pacs`
+
 ## Examples
 ### Package is not installed:
 ```
