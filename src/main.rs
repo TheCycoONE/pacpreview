@@ -1,21 +1,18 @@
 use alpm::{Alpm, AlpmList, Db, Dep, Package, SigLevel};
 
-const ROOT_DIR: &str = "/";
-const PKG_DB_DIR: &str = "/var/lib/pacman/";
-const ARCH: &str = "aarch64";
-const REPOS: [&str; 4] = ["core", "extra", "community", "alarm"];
-
 fn main() {
     let mut args = std::env::args();
     args.next();
     let pkg_name = args.next().expect("no argument?");
 
-    // setup alpm
-    let alpm = Alpm::new(ROOT_DIR, PKG_DB_DIR).unwrap();
-    alpm.set_arch(ARCH);
+    let pacman = pacmanconf::Config::new().unwrap();
 
-    for repo in REPOS.iter() {
-        alpm.register_syncdb(*repo, SigLevel::USE_DEFAULT).unwrap();
+    // setup alpm
+    let alpm = Alpm::new(pacman.root_dir, pacman.db_path).unwrap();
+
+    for repo in pacman.repos {
+        alpm.register_syncdb(repo.name, SigLevel::USE_DEFAULT)
+            .unwrap();
     }
 
     print_pkg_with_name(&pkg_name, &alpm);
@@ -41,7 +38,7 @@ fn print_dep_list(alpm: &Alpm, dep_list: AlpmList<Dep>) {
         if !dep.desc().is_empty() {
             print!(": {}", dep.desc());
         }
-        let ip = alpm.localdb().pkgs().find_satisfier(dep.name());
+        let ip = alpm.localdb().pkgs().find_satisfier(dep.to_string());
         if let Some(p) = ip {
             if p.name() == dep.name() {
                 print!(" [installed]");
