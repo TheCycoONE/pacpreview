@@ -4,9 +4,9 @@ version = 3
 
 [[package]]
 name = "alpm"
-version = "1.1.8"
+version = "1.1.11"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "393f4db567eb8e341b765f72e8ea955881b617c2fba38590d67671959a8ab5e3"
+checksum = "10c174871bfa0099a11be9592d43b6cea39d87329ae70ae8578ff6a5d8634d6f"
 dependencies = [
  "alpm-sys",
  "bitflags",
@@ -14,9 +14,9 @@ dependencies = [
 
 [[package]]
 name = "alpm-sys"
-version = "1.1.5"
+version = "1.1.7"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "4ce0e5a21bca8d7aaf0d2eca91f02e0c4841b6f9fd3f64bdf68169e381a91c22"
+checksum = "a5d5d8bc7a705313928951630d9d46860c886219d4e435b576ed2bbdc39ddbaa"
 
 [[package]]
 name = "bitflags"
@@ -45,4 +45,45 @@ version = "0.1.0"
 dependencies = [
  "alpm",
  "pacmanconf",
+ "termcolor",
 ]
+
+[[package]]
+name = "termcolor"
+version = "1.1.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "2dfed899f0eb03f32ee8c6a0aabdb8a7949659e3466561fc0adf54e26d88c5f4"
+dependencies = [
+ "winapi-util",
+]
+
+[[package]]
+name = "winapi"
+version = "0.3.9"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "5c839a674fcd7a98952e593242ea400abe93992746761e38641405d28b00f419"
+dependencies = [
+ "winapi-i686-pc-windows-gnu",
+ "winapi-x86_64-pc-windows-gnu",
+]
+
+[[package]]
+name = "winapi-i686-pc-windows-gnu"
+version = "0.4.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "ac3b87c63620426dd9b991e5ce0329eff545bccbbb34f3be09ff6fb6ab51b7b6"
+
+[[package]]
+name = "winapi-util"
+version = "0.1.5"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "70ec6ce85bb158151cae5e5c87f95a8e97d2c0c4b001223f33a334e3ce5de178"
+dependencies = [
+ "winapi",
+]
+
+[[package]]
+name = "winapi-x86_64-pc-windows-gnu"
+version = "0.4.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "712e227841d057c1ee1cd2fb22fa7e5a5461ae8e48fa2ca79ec42cfc1931183f"
