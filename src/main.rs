@@ -1,5 +1,7 @@
 use alpm::{Alpm, AlpmList, Db, Dep, Package, SigLevel};
 use termcolor::{Color, ColorChoice, ColorSpec, StandardStream, WriteColor};
+use textwrap::{termwidth};
+use std::env;
 
 fn print_installed(out: &mut impl WriteColor) -> std::io::Result<()> {
     out.set_color(ColorSpec::new().set_fg(Some(Color::Green)))?;
@@ -35,6 +37,14 @@ fn main() {
     if let Err(e) = res {
         eprintln!("Error: {}", e);
         std::process::exit(1);
+    }
+}
+
+fn out_width() -> usize {
+    if let Some(cols) = env::var("FZF_PREVIEW_COLUMNS").ok().and_then(|c| c.parse::<usize>().ok()) {
+        cols
+    } else {
+        termwidth()
     }
 }
 
@@ -99,8 +109,10 @@ fn print_package_details(
     }
     writeln!(out)?;
     if let Some(desc) = pkg.desc() {
+        let wrap_opts = textwrap::Options::new(out_width());
+
         writeln!(out)?;
-        writeln!(out, "{}", desc)?;
+        writeln!(out, "{}", textwrap::fill(desc, wrap_opts))?;
     }
     writeln!(out)?;
     if let Some(ip) = installed_pkg {
