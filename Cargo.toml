@@ -1,8 +1,8 @@
 [package]
 name = "pacpreview"
-version = "0.1.1"
+version = "0.2.0"
 authors = ["Stephen E. Baker <baker.stephen.e@gmail.com>"]
-edition = "2018"
+edition = "2021"
 
 description = "Unified info output for pacman packages"
 readme = "README.md"
@@ -12,11 +12,11 @@ keywords = ["pacman","archlinux"]
 categories = ["command-line-utilities"]
 
 [dependencies]
-alpm = "1.1"
+alpm = "2.2.1"
 pacmanconf = "1.0.0"
 termcolor = "1.1"
-clap = "~2.33.0"
-textwrap = { version = "0.13", features = ["terminal_size"] }
+clap = "~3.0.12"
+textwrap = { version = "0.14", features = ["terminal_size"] }
 
 [features]
 git = ["alpm/git"]

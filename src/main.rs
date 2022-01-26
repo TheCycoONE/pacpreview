@@ -92,7 +92,7 @@ fn print_dep_list(
         } else {
             DepInstalled::NotSatisfied
         };
-        out.print_dependency(dep.name(), dep.version().and_then(|v| Some(v.as_ref())), dep.desc(), dep_satisfied)?;
+        out.print_dependency(dep.name(), dep.version().map(|v| v.as_ref()), dep.desc().unwrap_or(""), dep_satisfied)?;
     }
     Ok(())
 }
