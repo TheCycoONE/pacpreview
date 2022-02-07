@@ -1,3 +1,5 @@
+//! Helpful unified package info screen for pacman
+
 mod output;
 mod types;
 
@@ -5,9 +7,10 @@ use alpm::{Alpm, AlpmList, Dep, Package, SigLevel};
 use output::Output;
 use types::{DepInstalled, Installed};
 
+/// pacman package information from the syncdb, as well as the local package if it is installed.
 struct PackageExtra<'alpm> {
     sync_pkg: Package<'alpm>,
-    local_pkg: Option<Package<'alpm>>
+    local_pkg: Option<Package<'alpm>>,
 }
 
 fn main() {
@@ -38,26 +41,27 @@ fn main() {
     }
 }
 
+/// Look for a package with a given name within the local installed packages and in the all of the
+/// repos.
 fn find_pkg_with_name<'name, 'alpm>(
     pkg_name: &'name str,
     alpm: &'alpm Alpm,
 ) -> Option<PackageExtra<'alpm>> {
-
     let installed_pkg = alpm.localdb().pkg(pkg_name).ok();
     let db_list = alpm.syncdbs();
     for db in db_list {
         if let Ok(pkg) = db.pkg(pkg_name) {
-            return Some(PackageExtra { local_pkg: installed_pkg, sync_pkg: pkg });
+            return Some(PackageExtra {
+                local_pkg: installed_pkg,
+                sync_pkg: pkg,
+            });
         }
     }
     None
 }
 
-fn print_package_details(
-    out: &mut Output,
-    alpm: &Alpm,
-    pkg: &PackageExtra
-) -> std::io::Result<()> {
+/// Print all of the information regarding a package
+fn print_package_details(out: &mut Output, alpm: &Alpm, pkg: &PackageExtra) -> std::io::Result<()> {
     print_title_line(out, pkg)?;
 
     if let Some(desc) = pkg.sync_pkg.desc() {
@@ -66,8 +70,8 @@ fn print_package_details(
     }
 
     out.println()?;
-    if let Some(ip) = pkg.local_pkg {
-        print_local_pkg_info(out, &pkg.sync_pkg, &ip)?;
+    if let Some(lp) = pkg.local_pkg {
+        print_local_pkg_info(out, &pkg.sync_pkg, &lp)?;
     }
 
     print_dep_list(out, alpm, pkg.sync_pkg.optdepends(), "Opt Depends")?;
@@ -78,7 +82,7 @@ fn print_dep_list(
     out: &mut Output,
     alpm: &Alpm,
     dep_list: AlpmList<Dep>,
-    header: &str
+    header: &str,
 ) -> std::io::Result<()> {
     out.print_section_header(header)?;
     for dep in dep_list {
@@ -92,31 +96,40 @@ fn print_dep_list(
         } else {
             DepInstalled::NotSatisfied
         };
-        out.print_dependency(dep.name(), dep.version().map(|v| v.as_ref()), dep.desc().unwrap_or(""), dep_satisfied)?;
+        out.print_dependency(
+            dep.name(),
+            dep.version().map(alpm::Ver::as_str),
+            dep.desc().unwrap_or(""),
+            dep_satisfied,
+        )?;
     }
     Ok(())
 }
 
 fn print_title_line(out: &mut Output, pkg: &PackageExtra) -> std::io::Result<()> {
     let installed = if let Some(ip) = pkg.local_pkg {
-        if ip.version() != pkg.sync_pkg.version() {
-            Installed::Outdated
-        } else {
+        if ip.version() == pkg.sync_pkg.version() {
             Installed::Installed
+        } else {
+            Installed::Outdated
         }
     } else {
         Installed::NotInstalled
     };
     let spkg = pkg.sync_pkg;
-    out.print_title(spkg.db().expect("found in a db").name(), spkg.name(), spkg.version(), installed)
+    out.print_title(
+        spkg.db().expect("found in a db").name(),
+        spkg.name(),
+        spkg.version(),
+        installed,
+    )
 }
 
 fn print_local_pkg_info(
     out: &mut Output,
     sync_pkg: &Package,
-    local_pkg: &Package
+    local_pkg: &Package,
 ) -> std::io::Result<()> {
-
     if local_pkg.version() != sync_pkg.version() {
         out.print_installed_version(local_pkg.version())?;
     }
