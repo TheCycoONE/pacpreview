@@ -16,7 +16,7 @@ alias pacs="pacman -Slq | fzf --multi --preview 'pacpreview {1}' | xargs -ro sud
 Then run:
 `pacs`
 
-![pacs screenshot](https://imgur.com/U0tDCsp)
+![pacs screenshot](https://imgur.com/U0tDCsp.png)
 
 ## Examples
 ### Package is not installed:
