@@ -1,6 +1,6 @@
 [package]
 name = "pacpreview"
-version = "0.2.2"
+version = "0.2.3"
 authors = ["Stephen E. Baker <baker.stephen.e@gmail.com>"]
 edition = "2021"
 
@@ -14,8 +14,8 @@ categories = ["command-line-utilities"]
 [dependencies]
 alpm = "2.2.1"
 pacmanconf = "2.0.0"
-termcolor = "1.1"
-textwrap = { version = "~0.15.0", features = ["terminal_size"] }
+termcolor = "1.2"
+textwrap = { version = "~0.16.0", features = ["terminal_size"] }
 
 [features]
 git = ["alpm/git"]
