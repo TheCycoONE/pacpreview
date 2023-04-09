@@ -57,7 +57,7 @@ fn find_pkg_with_name<'name, 'alpm>(
             });
         }
     }
-    None
+    installed_pkg.map(|x| PackageExtra { local_pkg: Some(x), sync_pkg: x })
 }
 
 /// Print all of the information regarding a package
@@ -118,7 +118,7 @@ fn print_title_line(out: &mut Output, pkg: &PackageExtra) -> std::io::Result<()>
     };
     let spkg = pkg.sync_pkg;
     out.print_title(
-        spkg.db().expect("found in a db").name(),
+        spkg.db().map_or("local", |x| x.name()),
         spkg.name(),
         spkg.version(),
         installed,
