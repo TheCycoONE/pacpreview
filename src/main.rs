@@ -9,8 +9,8 @@ use types::{DepInstalled, Installed};
 
 /// pacman package information from the syncdb, as well as the local package if it is installed.
 struct PackageExtra<'alpm> {
-    sync_pkg: Package<'alpm>,
-    local_pkg: Option<Package<'alpm>>,
+    sync_pkg: &'alpm Package,
+    local_pkg: Option<&'alpm Package>,
 }
 
 fn main() {
@@ -81,7 +81,7 @@ fn print_package_details(out: &mut Output, alpm: &Alpm, pkg: &PackageExtra) -> s
 fn print_dep_list(
     out: &mut Output,
     alpm: &Alpm,
-    dep_list: AlpmList<Dep>,
+    dep_list: AlpmList<&Dep>,
     header: &str,
 ) -> std::io::Result<()> {
     out.print_section_header(header)?;

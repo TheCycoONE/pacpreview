@@ -24,19 +24,19 @@ dependencies = [
 
 [[package]]
 name = "alpm"
-version = "2.2.1"
+version = "3.0.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "bedac9e074b9368777268cff76c02d8b26d3e567642a52379aadd5c5e204e120"
+checksum = "310ec5dc25b236ee96bebf975af2d2de85e61001a7c39a0a7436a414ff3f6490"
 dependencies = [
  "alpm-sys",
- "bitflags",
+ "bitflags 2.5.0",
 ]
 
 [[package]]
 name = "alpm-sys"
-version = "2.1.2"
+version = "3.0.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "fee1afe3484685ecedf03aefd7904428befed7815687e48aa4b21b3417eeecf0"
+checksum = "08a17e0cf15a06d4b86e30c606ee8808ad791300f3bd5e364c30360354b010bd"
 dependencies = [
  "pkg-config",
 ]
@@ -46,6 +46,12 @@ name = "bitflags"
 version = "1.3.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "bef38d45163c2f1dde094a7dfd33ccf595c92905c8f8f4fdc18d06fb1037718a"
+
+[[package]]
+name = "bitflags"
+version = "2.5.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "cf4b9d6a944f767f8e5e0db018570623c85f3d925ac718db4e06d0187adb21c1"
 
 [[package]]
 name = "cc"
@@ -149,16 +155,16 @@ checksum = "b7e5500299e16ebb147ae15a00a942af264cf3688f47923b8fc2cd5858f23ad3"
 
 [[package]]
 name = "pacmanconf"
-version = "2.0.0"
+version = "2.1.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "ba64fdfa5d4589657dc8c8497b67322d8a64c162357ea0359656bfe23eec6185"
+checksum = "31d9811f947c6ffc56eeafb789dfad44a7ea7cc383ac3bc6c9b23cd27100bbb1"
 dependencies = [
  "cini",
 ]
 
 [[package]]
 name = "pacpreview"
-version = "0.3.1"
+version = "0.4.0"
 dependencies = [
  "alpm",
  "pacmanconf",
@@ -168,9 +174,9 @@ dependencies = [
 
 [[package]]
 name = "pkg-config"
-version = "0.3.26"
+version = "0.3.30"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "6ac9a59f73473f1b8d852421e59e64809f025994837ef743615c6d0c5b305160"
+checksum = "d231b230927b5e4ad203db57bbcbee2802f6bce620b1e4a9024a07d94e2907ec"
 
 [[package]]
 name = "regex"
@@ -195,7 +201,7 @@ version = "0.37.11"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "85597d61f83914ddeba6a47b3b8ffe7365107221c2e557ed94426489fefb5f77"
 dependencies = [
- "bitflags",
+ "bitflags 1.3.2",
  "errno",
  "io-lifetimes",
  "libc",
@@ -211,9 +217,9 @@ checksum = "f67ad224767faa3c7d8b6d91985b78e70a1324408abcb1cfcc2be4c06bc06043"
 
 [[package]]
 name = "termcolor"
-version = "1.2.0"
+version = "1.4.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "be55cf8942feac5c765c2c993422806843c9a9a45d4d5c407ad6dd2ea95eb9b6"
+checksum = "06794f8f6c5c898b3275aebefa6b8a1cb24cd2c6c79397ab15774837a0bc5755"
 dependencies = [
  "winapi-util",
 ]
