@@ -1,6 +1,6 @@
 [package]
 name = "pacpreview"
-version = "0.4.0"
+version = "0.4.1"
 authors = ["Stephen E. Baker <baker.stephen.e@gmail.com>"]
 edition = "2021"
 
@@ -12,8 +12,8 @@ keywords = ["pacman","archlinux"]
 categories = ["command-line-utilities"]
 
 [dependencies]
-alpm = "3.0.5"
-pacmanconf = "2.1.0"
+alpm = "4.0.1"
+pacmanconf = "3.0.0"
 termcolor = "1.4.1"
 textwrap = { version = "~0.16.0", features = ["terminal_size"] }
 
