@@ -1,6 +1,6 @@
 [package]
 name = "pacpreview"
-version = "0.4.1"
+version = "0.4.2"
 authors = ["Stephen E. Baker <baker.stephen.e@gmail.com>"]
 edition = "2021"
 
@@ -12,7 +12,7 @@ keywords = ["pacman","archlinux"]
 categories = ["command-line-utilities"]
 
 [dependencies]
-alpm = "4.0.1"
+alpm = { version = "4.0.1", features = ["generate"] } # generate to workaround https://github.com/archlinux/alpm.rs/issues/35
 pacmanconf = "3.0.0"
 termcolor = "1.4.1"
 textwrap = { version = "~0.16.0", features = ["terminal_size"] }
