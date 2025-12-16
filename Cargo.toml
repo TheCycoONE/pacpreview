@@ -1,8 +1,8 @@
 [package]
 name = "pacpreview"
-version = "0.4.2"
+version = "0.5.0"
 authors = ["Stephen E. Baker <baker.stephen.e@gmail.com>"]
-edition = "2021"
+edition = "2024"
 
 description = "Unified info output for pacman packages"
 readme = "README.md"
@@ -12,8 +12,8 @@ keywords = ["pacman","archlinux"]
 categories = ["command-line-utilities"]
 
 [dependencies]
-alpm = { version = "4.0.1", features = ["generate"] } # generate to workaround https://github.com/archlinux/alpm.rs/issues/35
-pacmanconf = "3.0.0"
+alpm = { version = "5.0.0" }
+pacmanconf = "3.1.0"
 termcolor = "1.4.1"
 textwrap = { version = "~0.16.0", features = ["terminal_size"] }
 

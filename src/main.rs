@@ -57,7 +57,10 @@ fn find_pkg_with_name<'name, 'alpm>(
             });
         }
     }
-    installed_pkg.map(|x| PackageExtra { local_pkg: Some(x), sync_pkg: x })
+    installed_pkg.map(|x| PackageExtra {
+        local_pkg: Some(x),
+        sync_pkg: x,
+    })
 }
 
 /// Print all of the information regarding a package
